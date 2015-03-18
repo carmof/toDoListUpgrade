@@ -15,7 +15,10 @@ This document describes the Final Project for the class "Web Application".
   - Make a comment
 
 
-##Specific operations
+##Desgin
+- /model
+- /control
+- /view
 
 
 
