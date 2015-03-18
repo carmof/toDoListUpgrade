@@ -18,11 +18,13 @@ require.config({
 });
 
 // All other modules should be called through here
-require(["jquery"],
-function($) {
+require(["jquery", "structures/mixin", "structures"],
+function($, mixin, structures) {
    // mixin
    $(function() {
       console.log("Page loaded!");
    });
+   console.log("mixin:", mixin);
+   console.log("structures:", structures);
    console.log("Other things here");
 });
