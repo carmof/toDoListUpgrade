@@ -11,12 +11,16 @@
     <h1>Web Application Project</h1>
   </header>
   <main>
-    <canvas id="backgroundCanvas">
+    <canvas id="backgroundCanvas"  width="1200" height="800">
     </canvas>
+    <svg id="svgObjects">
+      <circle cx="100" cy="100" r="10" id="ball" />
+      <rect id="pad" height="15px" width="150px" x="200" y="200" rx="10" ry="20"/>
+    </svg>
   </main>
   <footer>
     <small>Thanks for visiting!</small>
   </footer>
-  <script data-main="app/main" src="require.js"></script>
+  <script data-main="app/main" src="lib/require.js"></script>
 </body>
 </html>
