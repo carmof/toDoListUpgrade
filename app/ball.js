@@ -4,31 +4,19 @@ var Ball, proto;
 *       Constructors
 */
 
-function makeNewBall() {
+function makeNewBall(ballID) {
    var ball = Object.create(proto,{
-      position: {
+      object: {
          enumerable: true,
          configurable: true,
          writeable: true,
-         value: {x: null,y: null}
-      },
-      radius: {
-         enumerable: true,
-         configurable: true,
-         writeable: true,
-         value: null
+         value: $(ballID)[0]
       },
       speed: {
-         enumerable: true,
-         configurable: true,
-         writeable: true,
-         value: 1
+
       },
       direction: {
-         enumerable: true,
-         configurable: true,
-         writeable: true,
-         value: Northeast
+         
       }
    });
 

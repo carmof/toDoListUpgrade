@@ -4,8 +4,18 @@ var Pad, proto;
 *       Constructors
 */
 
-function makeNewPad() {
-   var pad = Object.create(proto);
+function makeNewPad(padID) {
+   var pad = Object.create(proto,,{
+      object: {
+         enumerable: true,
+         configurable: true,
+         writeable: true,
+         value: $(padID)[0]
+      },
+      speed: {
+      	
+      }
+   });
    return pad;
 }
 
