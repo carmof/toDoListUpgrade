@@ -32,9 +32,16 @@ function($) {
 	*/
 
 	proto = {
-		clearCanvas: function(){
-			this.context.clearRect(0,0,canvasWidth,canvasHeight);
+		drawBall: function(){
+			
+		},
+		drawBrick: function(){
+
+		},
+		drawPad: function(){
+			
 		}
+
 	};
 
 

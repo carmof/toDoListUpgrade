@@ -4,19 +4,25 @@ var Ball, proto;
 *       Constructors
 */
 
-function makeNewBall(ballID) {
+function makeNewBall(rad, spd, dirc, colr, pos) {
    var ball = Object.create(proto,{
-      object: {
+      radius: {
          enumerable: true,
          configurable: true,
          writeable: true,
-         value: $(ballID)[0]
+         value: rad
       },
       speed: {
-
+         value = spd
       },
       direction: {
-         
+         value: dirc
+      },
+      color:{
+         value: colr
+      },
+      position:{
+         value : {"x": pos.x, "y": pos.y}
       }
    });
 
@@ -29,17 +35,16 @@ function makeNewBall(ballID) {
 */
 
 proto = {
+   setSpeed: function(newSpeed){
+      this.speed = newSpeed;
+   },
+   setColor: function(newColor){
+      this.color = newColor;
+   },
+   setSpeed: function(newSpeed;){
+      this.speed = newSpeed;
+   },
    reset: function(){
-
-   },
-   collideWall: function(){
-
-   },
-   collidePad: function(){
-
-   },
-   collideBrick: function(){
-      
    }
    
 };

@@ -25,6 +25,5 @@ function($, handleBars, Game) {
       var a = Game.new("backgroundCanvas", 500, 500);
    });
    console.log("Other things here");
-   alert("hi");
    
 });
