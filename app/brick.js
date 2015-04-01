@@ -9,24 +9,26 @@ function($) {
 
 	function makeNewBrick (wdh, hgt, pos, colr) {
 	   var brick = Object.create(proto,{
-	      width: {
-	         enumerable: true,
-	         configurable: true,
-	         writeable: true,
-	         value: wdh
-	      },
-	      hight: {
-	         value : hgt
-	      },
-	      position:{
-	         value : {"x": pos.x, "y": pos.y}
-	      },
-	      color:{
-	         value: colr
-	      }
-	   });
+		      width: {
+		         enumerable: true,
+		         configurable: true,
+		         writeable: true,
+		         value: wdh
+		      },
+		      hight: {
+		         value : hgt
+		      },
+		      position:{
+		         value : {"x": pos.x, "y": pos.y}
+		      },
+		      color:{
+		         value: colr
+		      }
+		});
+	    return brick;
+	}
 
-	   return brick;
+	   
 
 
 	/*
