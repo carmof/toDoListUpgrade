@@ -13,7 +13,7 @@ function makeNewBrick (wdh, hgt, pos, colr) {
          value: wdh
       },
       hight: {
-         value = hgt
+         value : hgt
       },
       position:{
          value : {"x": pos.x, "y": pos.y}
@@ -31,19 +31,19 @@ function makeNewBrick (wdh, hgt, pos, colr) {
 */
 
 proto = {
-	
+
 };
 
 
 
 // DO NOT MODIFY ANYTHING BELOW THIS LINE
 Brick = {
-new: makeNewBrick
+	new: makeNewBrick
 };
 
 Object.defineProperty(Brick, "prototype", {
-value: proto,
-writable: false
+	value: proto,
+	writable: false
 });
 
-module.exports = Brick;
+module.export = Brick;

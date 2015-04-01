@@ -13,7 +13,7 @@ function makeNewBall(rad, spd, dirc, colr, pos) {
          value: rad
       },
       speed: {
-         value = spd
+         value : spd
       },
       direction: {
          value: dirc
@@ -41,7 +41,7 @@ proto = {
    setColor: function(newColor){
       this.color = newColor;
    },
-   setSpeed: function(newSpeed;){
+   setSpeed: function(newSpeed){
       this.speed = newSpeed;
    },
    reset: function(){
@@ -53,12 +53,12 @@ proto = {
 
 // DO NOT MODIFY ANYTHING BELOW THIS LINE
 Ball = {
-new: makeNewBall
+   new: makeNewBall
 };
 
 Object.defineProperty(Ball, "prototype", {
-value: proto,
-writable: false
+   value: proto,
+   writable: false
 });
 
-module.exports = Ball;
+module.export = Ball;

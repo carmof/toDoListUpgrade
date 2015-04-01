@@ -13,7 +13,7 @@ function makeNewPad(dh, hgt, rad, spd, dirc, colr, pos) {
          value: wdh
       },
       hight: {
-         value = hgt
+         value : hgt
       },
       radius: {
          enumerable: true,
@@ -22,7 +22,7 @@ function makeNewPad(dh, hgt, rad, spd, dirc, colr, pos) {
          value: rad
       },
       speed: {
-         value = spd
+         value : spd
       },
       direction: {
          value: dirc
@@ -48,7 +48,7 @@ proto = {
    setColor: function(newColor){
       this.color = newColor;
    },
-   setSpeed: function(newSpeed;){
+   setSpeed: function(newSpeed){
       this.speed = newSpeed;
    },
    reset: function(){

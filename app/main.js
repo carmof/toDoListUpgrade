@@ -21,9 +21,8 @@ require(["jquery", "handlebars", "app/game.js"],
 function($, handleBars, Game) {
    // mixin
    $(function() {
-      console.log("Page loaded!");
       var a = Game.new("backgroundCanvas", 500, 500);
+      a.loop();
    });
-   console.log("Other things here");
    
 });
