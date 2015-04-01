@@ -1,64 +1,69 @@
-var Ball, proto;
+define(["jquery"],
+function($) {
 
-/*
-*       Constructors
-*/
+   var Ball, proto;
 
-function makeNewBall(rad, spd, dirc, colr, pos) {
-   var ball = Object.create(proto,{
-      radius: {
-         enumerable: true,
-         configurable: true,
-         writeable: true,
-         value: rad
+   /*
+   *       Constructors
+   */
+
+   function makeNewBall(rad, spd, dirc, colr, pos) {
+      var ball = Object.create(proto,{
+         radius: {
+            enumerable: true,
+            configurable: true,
+            writeable: true,
+            value: rad
+         },
+         speed: {
+            value : spd
+         },
+         direction: {
+            value: dirc
+         },
+         color:{
+            value: colr
+         },
+         position:{
+            value : {"x": pos.x, "y": pos.y}
+         }
+      });
+
+      return ball;
+   }
+
+
+   /*
+   *       Prototype / Instance methods
+   */
+
+   proto = {
+      setSpeed: function(newSpeed){
+         this.speed = newSpeed;
       },
-      speed: {
-         value : spd
+      setColor: function(newColor){
+         this.color = newColor;
       },
-      direction: {
-         value: dirc
+      setSpeed: function(newSpeed){
+         this.speed = newSpeed;
       },
-      color:{
-         value: colr
-      },
-      position:{
-         value : {"x": pos.x, "y": pos.y}
+      reset: function(){
       }
+      
+   };
+
+
+
+   // DO NOT MODIFY ANYTHING BELOW THIS LINE
+   Ball = {
+      new: makeNewBall
+   };
+
+   Object.defineProperty(Ball, "prototype", {
+      value: proto,
+      writable: false
    });
 
-   return ball;
-}
+   return Ball;
 
-
-/*
-*       Prototype / Instance methods
-*/
-
-proto = {
-   setSpeed: function(newSpeed){
-      this.speed = newSpeed;
-   },
-   setColor: function(newColor){
-      this.color = newColor;
-   },
-   setSpeed: function(newSpeed){
-      this.speed = newSpeed;
-   },
-   reset: function(){
-   }
-   
-};
-
-
-
-// DO NOT MODIFY ANYTHING BELOW THIS LINE
-Ball = {
-   new: makeNewBall
-};
-
-Object.defineProperty(Ball, "prototype", {
-   value: proto,
-   writable: false
 });
-
-module.export = Ball;

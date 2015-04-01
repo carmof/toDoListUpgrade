@@ -1,49 +1,53 @@
-var Brick, proto;
+define(["jquery"],
+function($) {
 
-/*
-*       Constructors
-*/
+	var Brick, proto;
 
-function makeNewBrick (wdh, hgt, pos, colr) {
-   var brick = Object.create(proto,{
-      width: {
-         enumerable: true,
-         configurable: true,
-         writeable: true,
-         value: wdh
-      },
-      hight: {
-         value : hgt
-      },
-      position:{
-         value : {"x": pos.x, "y": pos.y}
-      },
-      color:{
-         value: colr
-      }
-   });
+	/*
+	*       Constructors
+	*/
 
-   return brick;
+	function makeNewBrick (wdh, hgt, pos, colr) {
+	   var brick = Object.create(proto,{
+	      width: {
+	         enumerable: true,
+	         configurable: true,
+	         writeable: true,
+	         value: wdh
+	      },
+	      hight: {
+	         value : hgt
+	      },
+	      position:{
+	         value : {"x": pos.x, "y": pos.y}
+	      },
+	      color:{
+	         value: colr
+	      }
+	   });
 
-
-/*
-*       Prototype / Instance methods
-*/
-
-proto = {
-
-};
+	   return brick;
 
 
+	/*
+	*       Prototype / Instance methods
+	*/
 
-// DO NOT MODIFY ANYTHING BELOW THIS LINE
-Brick = {
-	new: makeNewBrick
-};
+	proto = {
 
-Object.defineProperty(Brick, "prototype", {
-	value: proto,
-	writable: false
+	};
+
+
+
+	// DO NOT MODIFY ANYTHING BELOW THIS LINE
+	Brick = {
+		new: makeNewBrick
+	};
+
+	Object.defineProperty(Brick, "prototype", {
+		value: proto,
+		writable: false
+	});
+
+	return Brick;
 });
-
-module.export = Brick;
