@@ -22,7 +22,7 @@ function($, handleBars, Game) {
    // mixin
    $(function() {
       var a = Game.new("backgroundCanvas", 500, 500);
-      a.loop();
+      a.startGame();
    });
    
 });

@@ -45,7 +45,7 @@ function($, Ball, Brick, Pad) {
 
 	proto = {
 		startGame: function(){
-
+			this.loop();
 		},
 		drawBall: function(){
 
