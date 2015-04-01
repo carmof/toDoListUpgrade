@@ -15,7 +15,7 @@ function($) {
 		         writeable: true,
 		         value: wdh
 		      },
-		      hight: {
+		      height: {
 		         value : hgt
 		      },
 		      position:{

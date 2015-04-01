@@ -3,7 +3,7 @@ define(["jquery", "app/ball.js", "app/brick.js", "app/pad.js"],
 function($, Ball, Brick, Pad) {
 
 	var Game, proto, canvasWidth, canvasHeight,
-	brickWidth = 50, brickHeight = 20, ballRadius = 9, padWidth = 150, padHeight = 40, padRadius = 5;
+	brickWidth = 100, brickHeight = 40, ballRadius = 9, padWidth = 150, padHeight = 40, padRadius = 5;
 
 	/*
 	*       Constructors
@@ -56,14 +56,11 @@ function($, Ball, Brick, Pad) {
 
 		},
 		positionBricks: function(numRows, numCol){
-			var brick = Brick.new(brickWidth, brickHeight, {"x": 100, "y": 100}, "rgb(0,0,0)");
-			this.drawBrick(brick);
+			var brick = Brick.new(brickWidth, brickHeight, {"x": 100, "y": 100}, "#FFFFFF");
 		},
 		drawBrick: function(brick){
-			console.log(brick);
 			this.context.fillStyle = brick.color;
-			console.log("this.context.fillRect("+brick.width+", "+brick.height+", "+ brick.position.x+", "+brick.position.y+");");
-        	this.context.fillRect(brick.position.x, brick.position.y, brick.width, brick.height);
+        	this.context.fillRect (brick.width, brick.height, brick.position.x, brick.position.y);
 		},
 		drawPad: function(){
 
@@ -71,6 +68,11 @@ function($, Ball, Brick, Pad) {
 		loop: function(){
 			console.log(this.canvas);
 			console.log(this.context);
+			this.context.fillStyle = "rgb(200,0,0)";
+        	this.context.fillRect (10, 10, 55, 50);
+
+	        this.context.fillStyle = "rgba(0, 0, 200, 0.5)";
+	        this.context.fillRect (30, 30, 55, 50)
 		}
 
 	};
