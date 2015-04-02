@@ -7,7 +7,7 @@ function($) {
 	*       Constructors
 	*/
 
-	function makeNewBrick (wdh, hgt, pos, colr) {
+	function makeNewBrick (wdh, hgt, posX, posY, colr) {
 	   var brick = Object.create(proto,{
 		      width: {
 		         enumerable: true,
@@ -18,8 +18,11 @@ function($) {
 		      height: {
 		         value : hgt
 		      },
-		      position:{
-		         value : {"x": pos.x, "y": pos.y}
+		      x:{
+		         value : posX
+		      },
+		      y:{
+		      	value : posY
 		      },
 		      color:{
 		         value: colr

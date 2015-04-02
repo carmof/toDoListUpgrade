@@ -7,19 +7,8 @@ function($) {
    *       Constructors
    */
 
-   function makeNewCanvas(varCanvas, varContext) {
-      var base = Object.create(proto,{
-         canvas: {
-            enumerable: true,
-            configurable: true,
-            writeable: true,
-            value: varCanvas
-         },
-         context: {
-            value : varContext
-         }
-      });
-
+   function makeNewCanvas() {
+      var base = Object.create(proto);
       return base;
    }
 
@@ -29,6 +18,19 @@ function($) {
    */
 
    proto = {
+      render: function(data, stage){
+         var that = this;
+         data.bricks.forEach(function(brick){
+            that.drawBrick(brick, stage);
+         });
+         stage.update();
+
+      },
+      drawBrick: function(brick, stage){
+         var rec = new createjs.Shape();
+         rec.graphics.beginFill(brick.color).drawRoundRect (brick.x, brick.y, brick.width, brick.height, 5);
+         stage.addChild(rec);
+      },
       drawObject: function(object){
          this.context.fillStyle = object.color;
          this.context.fillRect(object.position.x, object.position.y, object.width, object.height);
