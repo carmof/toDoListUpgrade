@@ -21,7 +21,7 @@ require.config({
 require(["jquery", "handlebars", "app/game.js"],
 function($, handleBars, Game, easel) {
    // mixin
-   $(function() {
+   $(function() { 
       var a = Game.new("backgroundCanvas", 500, 500);
       a.startGame();
    });
