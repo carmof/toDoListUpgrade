@@ -22,8 +22,8 @@ require(["jquery", "handlebars", "app/game.js", "easelJS"],
 function($, handleBars, Game, easel) {
    // mixin
    $(function() {
-       console.log("-----");
-      console.log(easel);
+      //  console.log("-----");
+      // console.log(easel);
       // console.log("oi");
       var a = Game.new("backgroundCanvas", 500, 500);
       a.startGame();

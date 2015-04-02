@@ -12,32 +12,12 @@ function($, Ball, Brick, Pad, Canvas) {
 
 	function makeNewGame(cnvsId) {
 		canvasID = cnvsId;
-		var base = Object.create(proto, {
-			canvas: {
-		        enumerable: true,
-		        configurable: true,
-		        writeable: true,
-		        value: null
-		    },
-			context: {
-		        enumerable: true,
-		        configurable: true,
-		        writeable: true,
-		        value: null
-		    },
-		    bricks: {
-		    	value: []
-		    },
-		    ball: {
-		    	value: null
-		    },
-		    pad:{
-		    	value: null
-		    },
-		    time:{
-		    	value: null
-		    }
-		});
+		var base = Object.create(proto);
+		base.canvas = null;
+		base.bricks = [];
+		base.ball = null;
+		base.pad = null;
+		base.time = null;
 		return base;
 	}
 
@@ -63,17 +43,13 @@ function($, Ball, Brick, Pad, Canvas) {
 			this.drawBrick(brick);
 		},
 		drawBrick: function(brick){
-			console.log(brick);
 			this.context.fillStyle = brick.color;
-			console.log("this.context.fillRect("+brick.width+", "+brick.height+", "+ brick.position.x+", "+brick.position.y+");");
         	this.context.fillRect(brick.position.x, brick.position.y, brick.width, brick.height);
 		},
 		drawPad: function(){
 
 		},
 		loop: function(){
-			console.log(this.canvas);
-			console.log(this.context);
 		}
 
 	};
