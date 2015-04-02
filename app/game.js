@@ -28,6 +28,7 @@ function($, Ball, Brick, Pad, Canvas) {
 
 	proto = {
 		startGame: function(){
+			console.log(createjs);
 			var brick = Brick.new(brickWidth, brickHeight, {"x": 100, "y": 100}, "rgb(0,0,0)");
 			this.canvas = Canvas.new($("#" + canvasID)[0], $("#" + canvasID)[0].getContext("2d"));
 			console.log(this.canvas);

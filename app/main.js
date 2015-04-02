@@ -18,13 +18,10 @@ require.config({
 });
 
 // All other modules should be called through here
-require(["jquery", "handlebars", "app/game.js", "easelJS"],
+require(["jquery", "handlebars", "app/game.js"],
 function($, handleBars, Game, easel) {
    // mixin
    $(function() {
-      //  console.log("-----");
-      // console.log(easel);
-      // console.log("oi");
       var a = Game.new("backgroundCanvas", 500, 500);
       a.startGame();
    });
