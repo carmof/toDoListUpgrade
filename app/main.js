@@ -9,7 +9,8 @@ require.config({
    paths: {
       "lib": "../lib",
       "jquery": "../lib/jquery",
-      "handlebars": "../lib/handlebars-v3.0.0"
+      "handlebars": "../lib/handlebars-v3.0.0",
+      "easelJS": "https://code.createjs.com/easeljs-0.8.0.min"
       // or the following to load remotely:
       // "jquery": "https://code.jquery.com/jquery-2.1.3.min"
    },
@@ -17,10 +18,13 @@ require.config({
 });
 
 // All other modules should be called through here
-require(["jquery", "handlebars", "app/game.js"],
-function($, handleBars, Game) {
+require(["jquery", "handlebars", "app/game.js", "easelJS"],
+function($, handleBars, Game, easel) {
    // mixin
    $(function() {
+       console.log("-----");
+      console.log(easel);
+      // console.log("oi");
       var a = Game.new("backgroundCanvas", 500, 500);
       a.startGame();
    });

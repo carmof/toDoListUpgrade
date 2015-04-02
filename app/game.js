@@ -1,27 +1,29 @@
 
-define(["jquery", "app/ball.js", "app/brick.js", "app/pad.js"],
-function($, Ball, Brick, Pad) {
+define(["jquery", "app/ball.js", "app/brick.js", "app/pad.js", "app/canvas.js"],
+function($, Ball, Brick, Pad, Canvas) {
 
-	var Game, proto, canvasWidth, canvasHeight,
-	brickWidth = 50, brickHeight = 20, ballRadius = 9, padWidth = 150, padHeight = 40, padRadius = 5;
+	var Game, proto, canvasWidth, canvasHeight, canvasID
+	brickWidth = 50, brickHeight = 20, ballRadius = 9,
+	padWidth = 150, padHeight = 40, padRadius = 5;
 
 	/*
 	*       Constructors
 	*/
 
-	function makeNewGame(canvasId, canvasHgt, canvasWth) {
+	function makeNewGame(cnvsId) {
+		canvasID = cnvsId;
 		var base = Object.create(proto, {
 			canvas: {
 		        enumerable: true,
 		        configurable: true,
 		        writeable: true,
-		        value: $("#" + canvasId)[0]
+		        value: null
 		    },
 			context: {
 		        enumerable: true,
 		        configurable: true,
 		        writeable: true,
-		        value: $("#" + canvasId)[0].getContext("2d")
+		        value: null
 		    },
 		    bricks: {
 		    	value: []
@@ -46,9 +48,10 @@ function($, Ball, Brick, Pad) {
 
 	proto = {
 		startGame: function(){
-			this.positionBricks(4, 10);
-			this.drawBall();
-			this.drawPad();
+			var brick = Brick.new(brickWidth, brickHeight, {"x": 100, "y": 100}, "rgb(0,0,0)");
+			this.canvas = Canvas.new($("#" + canvasID)[0], $("#" + canvasID)[0].getContext("2d"));
+			console.log(this.canvas);
+			this.canvas.drawObject(brick);
 			this.loop();
 
 		},
@@ -83,8 +86,8 @@ function($, Ball, Brick, Pad) {
 	};
 
 	Object.defineProperty(Game, "prototype", {
-	value: proto,
-	writable: false
+		value: proto,
+		writable: false
 	});
 
    return Game;
