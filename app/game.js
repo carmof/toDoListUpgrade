@@ -10,12 +10,13 @@ function($, Ball, Brick, Pad, Canvas) {
 	*       Constructors
 	*/
 
-	function makeNewGame(cnvsId) {
+	function makeNewGame(canvasObj) {
 		canvasID = cnvsId;
 		var base = Object.create(proto);
-		base.canvas = null;
+		base.stage = canvasObj;
+		console.log(canvasObj);
 		base.bricks = [];
-		base.ball = null;
+		base.ball = Ball.new(ballRadius, 1, 0, "#(FFFFFF", {"x": 100, "y": 100});
 		base.pad = null;
 		base.time = null;
 		return base;
@@ -28,12 +29,18 @@ function($, Ball, Brick, Pad, Canvas) {
 
 	proto = {
 		startGame: function(){
-			console.log(createjs);
-			var brick = Brick.new(brickWidth, brickHeight, {"x": 100, "y": 100}, "rgb(0,0,0)");
-			this.canvas = Canvas.new($("#" + canvasID)[0], $("#" + canvasID)[0].getContext("2d"));
-			console.log(this.canvas);
-			this.canvas.drawObject(brick);
-			this.loop();
+			var circle = new createjs.Shape();
+			circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
+			circle.x = 100;
+			circle.y = 100;
+			this.stage.addChild(circle);
+			this.stage.update();
+			// console.log(createjs);
+			// var brick = Brick.new(brickWidth, brickHeight, {"x": 100, "y": 100}, "rgb(0,0,0)");
+			// this.canvas = Canvas.new($("#" + canvasID)[0], $("#" + canvasID)[0].getContext("2d"));
+			// console.log(this.canvas);
+			// this.canvas.drawObject(brick);
+			// this.loop();
 
 		},
 		drawBall: function(){
@@ -48,6 +55,9 @@ function($, Ball, Brick, Pad, Canvas) {
         	this.context.fillRect(brick.position.x, brick.position.y, brick.width, brick.height);
 		},
 		drawPad: function(){
+
+		},
+		render: function(){
 
 		},
 		loop: function(){
