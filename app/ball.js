@@ -7,7 +7,7 @@ function($) {
    *       Constructors
    */
 
-   function makeNewBall(rad, spd, dirc, colr, pos) {
+   function makeNewBall(rad, spd, dirc, colr, posX, posY) {
       var ball = Object.create(proto,{
          radius: {
             enumerable: true,
@@ -24,8 +24,11 @@ function($) {
          color:{
             value: colr
          },
-         position:{
-            value : {"x": pos.x, "y": pos.y}
+         x:{
+            value: posX
+         },
+         y:{
+            value: posY
          }
       });
 

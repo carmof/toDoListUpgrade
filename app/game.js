@@ -7,7 +7,7 @@ function($, Ball, Brick, Pad, Canvas) {
 	brickCols = 10,
 	ballRadius = 9,
 	padWidth = 150,
-	padHeight = 40,
+	padHeight = 50,
 	padRadius = 5,
 	canvasPadding = 10,
 	bricksPadding = 15,
@@ -22,9 +22,11 @@ function($, Ball, Brick, Pad, Canvas) {
 		var base = Object.create(proto);
 		base.canvas = Canvas.new(canvasObj);
 		base.stage = canvasObj;
+		base.canvasWidth = base.stage.canvas.width;
+		base.canvasHeight = base.stage.canvas.height;
 		base.bricks = [];
-		base.ball = Ball.new(ballRadius, 1, 0, "#(FFFFFF)", {"x": 100, "y": 100});
-		base.pad = null;
+		base.ball = Ball.new(ballRadius, 0, 0, "#(000000)", base.canvasWidth/2, base.canvasHeight - 70);//rad, spd, dirc, colr, pos
+		base.pad = Pad.new(padWidth, padHeight, padRadius, 0, 0, "#(111111)",  base.canvasWidth/2 - padWidth/2, base.canvasHeight - 70 + ballRadius);
 		base.time = null;
 		return base;
 	}
@@ -33,15 +35,32 @@ function($, Ball, Brick, Pad, Canvas) {
 	/*
 	*       Prototype / Instance methods
 	*/
+	//handle gamePlay
+	
 
 	proto = {
 		startGame: function(){
+			var that = this;
 			this.initGame();
-			this.canvas.render(this.getState(), this.stage);
+			this.canvas.start(this.getState(), this.stage);
+			var intervalID = window.setInterval(function(){that.loop();}, 1000/30);
 		},
 		initGame: function(){
+			var that = this, posX = 10, posY = 10, i = 0, j = 0;
+			//adding listener to windows
+			window.addEventListener('keydown', function (evt) {
+			    switch (evt.keyCode) {
+			        // Left arrow
+			        case 37:
+			        	that.pad.speed += -6;
+			            break;
+			        // Right arrow   
+			        case 39:
+			            that.pad.speed += 10;
+			            break;
+			    }
+			}, true);
 			//setting all bricks
-			var posX = 10, posY = 10, i = 0, j = 0;
 			for(i = 0; i < brickRows; i++){
 				for(j = 0; j < brickCols; j++){
 					this.bricks.push( Brick.new(brickWidth, brickHeight,posX, posY, "#00FEAA") );
@@ -63,17 +82,19 @@ function($, Ball, Brick, Pad, Canvas) {
 			var brick = Brick.new(brickWidth, brickHeight, {"x": 100, "y": 100}, "rgb(0,0,0)");
 			this.drawBrick(brick);
 		},
-		// drawBrick: function(brick){
-		// 	this.context.fillStyle = brick.color;
-  //       	this.context.fillRect(brick.position.x, brick.position.y, brick.width, brick.height);
-		// },
-		drawPad: function(){
 
-		},
-		render: function(){
-
-		},
 		loop: function(){
+			this.movePad();
+			this.canvas.render(this.getState(), this.stage);
+		},
+		movePad: function(){
+			this.pad.x += this.pad.speed;
+			if(this.pad.x < 0){
+				this.pad.x = 0;
+			}
+			if(this.pad.x > (this.canvasWidth - this.pad.width)){
+				this.pad.x = this.canvasWidth - this.pad.width;
+			}
 		}
 
 	};

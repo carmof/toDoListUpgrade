@@ -6,36 +6,17 @@ function($) {
 	*       Constructors
 	*/
 
-	function makeNewPad(dh, hgt, rad, spd, dirc, colr, pos) {
-	   var pad = Object.create(proto,{
-	   	width: {
-	         enumerable: true,
-	         configurable: true,
-	         writeable: true,
-	         value: wdh
-	      },
-	      hight: {
-	         value : hgt
-	      },
-	      radius: {
-	         enumerable: true,
-	         configurable: true,
-	         writeable: true,
-	         value: rad
-	      },
-	      speed: {
-	         value : spd
-	      },
-	      direction: {
-	         value: dirc
-	      },
-	      color:{
-	         value: colr
-	      },
-	      position:{
-	         value : {"x": pos.x, "y": pos.y}
-	      }
-	   });
+	function makeNewPad(wdh, hgt, rad, spd, dirc, colr, posX, posY) {
+		var pad = Object.create(proto);
+		pad.width = wdh;
+		pad.hight = hgt;
+		pad.radius = rad;
+		pad.speed = spd;
+		pad.direction = dirc;
+		pad.color = colr;
+		pad.x = posX;
+		pad.y = posY;
+	   return pad;
 	}
 
 
