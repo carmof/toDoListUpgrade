@@ -5,14 +5,16 @@ function($, Ball, Brick, Pad, Canvas) {
 	var Game, proto, canvasWidth, canvasHeight, canvasID
 	brickRows = 5,
 	brickCols = 10,
-	ballRadius = 9,
+	ballRadius = 10,
 	padWidth = 150,
 	padHeight = 50,
 	padRadius = 5,
 	canvasPadding = 10,
 	bricksPadding = 15,
 	brickHeight = 20,
-	brickWidth = 100;
+	brickWidth = 100,
+	padSpeed = 10;
+
 
 	/*
 	*       Constructors
@@ -27,6 +29,7 @@ function($, Ball, Brick, Pad, Canvas) {
 		base.bricks = [];
 		base.ball = Ball.new(ballRadius, 0, 0, "#(000000)", base.canvasWidth/2, base.canvasHeight - 70);//rad, spd, dirc, colr, pos
 		base.pad = Pad.new(padWidth, padHeight, padRadius, 0, 0, "#(111111)",  base.canvasWidth/2 - padWidth/2, base.canvasHeight - 70 + ballRadius);
+		this.prevBall = null;
 		base.time = null;
 		return base;
 	}
@@ -43,7 +46,7 @@ function($, Ball, Brick, Pad, Canvas) {
 			var that = this;
 			this.initGame();
 			this.canvas.start(this.getState(), this.stage);
-			var intervalID = window.setInterval(function(){that.loop();}, 1000/30);
+			var intervalID = window.setInterval(function(){that.loop();}, 1000/50);
 		},
 		initGame: function(){
 			var that = this, posX = 10, posY = 10, i = 0, j = 0;
@@ -52,11 +55,11 @@ function($, Ball, Brick, Pad, Canvas) {
 			    switch (evt.keyCode) {
 			        // Left arrow
 			        case 37:
-			        	that.pad.speed += -6;
+			        	that.pad.speed += -padSpeed;
 			            break;
 			        // Right arrow   
 			        case 39:
-			            that.pad.speed += 10;
+			            that.pad.speed += padSpeed;
 			            break;
 			    }
 			}, true);
@@ -69,6 +72,9 @@ function($, Ball, Brick, Pad, Canvas) {
 				posY += brickHeight + bricksPadding;
 				posX = 10;
 			}
+
+			//start ball movement
+			this.ball.direction = 1;
 		},
 		getState: function(){
 			return {
@@ -85,10 +91,28 @@ function($, Ball, Brick, Pad, Canvas) {
 
 		loop: function(){
 			this.movePad();
+			this.ballCollision();
 			this.canvas.render(this.getState(), this.stage);
 		},
+		ballCollision: function(){
+			this.ballCollideWithWindow();
+			this.ball.x += 5 * this.ball.direction;
+			console.log(this.ball.direction);
+			
+		},
+		ballCollideWithWindow: function(){
+			if(this.ball.x - this.ball.radius > 0 && this.ball.x + this.ball.radius < this.canvasWidth){
+				return true;
+			}
+			this.ball.direction *= -1;
+		},
 		movePad: function(){
-			this.pad.x += this.pad.speed;
+			// var padRightSide = padWidth;
+			this.pad.x += this.pad.speed *0.8;
+			this.pad.speed = 0;
+			// padRightSide += this.pad.x;
+
+
 			if(this.pad.x < 0){
 				this.pad.x = 0;
 			}

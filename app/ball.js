@@ -8,30 +8,13 @@ function($) {
    */
 
    function makeNewBall(rad, spd, dirc, colr, posX, posY) {
-      var ball = Object.create(proto,{
-         radius: {
-            enumerable: true,
-            configurable: true,
-            writeable: true,
-            value: rad
-         },
-         speed: {
-            value : spd
-         },
-         direction: {
-            value: dirc
-         },
-         color:{
-            value: colr
-         },
-         x:{
-            value: posX
-         },
-         y:{
-            value: posY
-         }
-      });
-
+      var ball = Object.create(proto);
+      ball.radius = rad;
+      ball.speed = spd;
+      ball.direction = dirc;
+      ball.color = colr;
+      ball.x = posX;
+      ball.y = posY;
       return ball;
    }
 

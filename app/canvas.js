@@ -28,26 +28,31 @@ function($) {
          });
 
          this.ball = this.drawBall(data.ball, stage);
-         // xxx.MoveTo(0,0);
          this.pad = this.drawObject(data.pad, stage);
          stage.update();
 
       },
       render: function(data, stage){
-         this.pad.x = data.pad.speed;
+         this.pad.x = data.pad.x;
+         this.ball.x = data.ball.x;
+         this.ball.y = data.ball.y;
          stage.update();
       },
       drawObject: function(object, stage){
          var obj, radius;
          obj = new createjs.Shape();
          radius = object.radius ? object.radius : 5;
-         obj.graphics.beginFill(object.color).drawRoundRect(object.x, object.y, object.width, object.height, 5);
+         obj.graphics.beginFill(object.color).drawRoundRect(0, 0, object.width, object.height, 5);
+         obj.x = object.x;
+         obj.y = object.y;
          stage.addChild(obj);
          return obj;
       },
       drawBall: function(ball, stage){
          var circle = new createjs.Shape();
-         circle.graphics.beginFill(ball.color).drawCircle(ball.x, ball.y, ball.radius);
+         circle.graphics.beginFill(ball.color).drawCircle( 0, 0, ball.radius);
+         circle.x = ball.x;
+         circle.y = ball.y;
          stage.addChild(circle);
          return circle;
       },
