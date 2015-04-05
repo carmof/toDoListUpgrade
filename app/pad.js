@@ -9,13 +9,14 @@ function($) {
 	function makeNewPad(wdh, hgt, rad, spd, dirc, colr, posX, posY) {
 		var pad = Object.create(proto);
 		pad.width = wdh;
-		pad.hight = hgt;
+		pad.height = hgt;
 		pad.radius = rad;
 		pad.speed = spd;
 		pad.direction = dirc;
 		pad.color = colr;
 		pad.x = posX;
 		pad.y = posY;
+		pad.directionX = 0;
 	   return pad;
 	}
 

@@ -1,33 +1,23 @@
 define(["jquery"],
 function($) {
 
-	var Brick, proto;
+	var Brick, proto, ID = 1;
 
 	/*
 	*       Constructors
 	*/
 
 	function makeNewBrick (wdh, hgt, posX, posY, colr) {
-	   var brick = Object.create(proto,{
-		      width: {
-		         enumerable: true,
-		         configurable: true,
-		         writeable: true,
-		         value: wdh
-		      },
-		      height: {
-		         value : hgt
-		      },
-		      x:{
-		         value : posX
-		      },
-		      y:{
-		      	value : posY
-		      },
-		      color:{
-		         value: colr
-		      }
-		});
+
+		var brick = Object.create(proto);
+		brick.id = ID;
+		brick.width = wdh;
+		brick.height = hgt;
+		brick.x = posX;
+		brick.y = posY;
+		brick.color = colr;
+		ID += 1;
+		brick.dead = false;
 	    return brick;
 	}
 

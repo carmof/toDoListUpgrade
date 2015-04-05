@@ -24,7 +24,7 @@ function($) {
       start: function(data, stage){
          var that = this;
          data.bricks.forEach(function(brick){
-            that.bricks.push(that.drawObject(brick, stage));
+            that.bricks[brick.id] = that.drawObject(brick, stage);
          });
 
          this.ball = this.drawBall(data.ball, stage);
@@ -33,9 +33,17 @@ function($) {
 
       },
       render: function(data, stage){
+         var that = this;
          this.pad.x = data.pad.x;
          this.ball.x = data.ball.x;
          this.ball.y = data.ball.y;
+         data.bricks.forEach(function(brick){
+            if(brick.dead){
+               that.bricks[brick.id].x = -100;
+               that.bricks[brick.id].y = -100;
+            }
+         });
+         this.pad.speed = data.pad.speed;
          stage.update();
       },
       drawObject: function(object, stage){
@@ -55,12 +63,6 @@ function($) {
          circle.y = ball.y;
          stage.addChild(circle);
          return circle;
-      },
-      clearObject: function(object){
-      },
-      moveObject: function(object){
-      },
-      reset: function(){
       }
    };
 

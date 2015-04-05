@@ -7,11 +7,12 @@ function($) {
    *       Constructors
    */
 
-   function makeNewBall(rad, spd, dirc, colr, posX, posY) {
+   function makeNewBall(rad, spd, dircX, dircY, colr, posX, posY) {
       var ball = Object.create(proto);
       ball.radius = rad;
       ball.speed = spd;
-      ball.direction = dirc;
+      ball.directionX = dircX;
+      ball.directionY = dircY;
       ball.color = colr;
       ball.x = posX;
       ball.y = posY;
