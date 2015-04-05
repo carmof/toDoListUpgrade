@@ -7,12 +7,13 @@ function($) {
 	*       Constructors
 	*/
 
-	function makeNewBrick (wdh, hgt, posX, posY, colr) {
+	function makeNewBrick (wdh, hgt, rad, posX, posY, colr) {
 
 		var brick = Object.create(proto);
 		brick.id = ID;
 		brick.width = wdh;
 		brick.height = hgt;
+		brick.radius = rad;
 		brick.x = posX;
 		brick.y = posY;
 		brick.color = colr;

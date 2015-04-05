@@ -12,7 +12,7 @@ function($) {
       base.ball = null;
       base.pad = null;
       base.bricks = [];
-
+      base.bitmap = new createjs.Bitmap("css/img/background.jpg");
       return base;
    }
 
@@ -23,12 +23,14 @@ function($) {
    proto = {
       start: function(data, stage){
          var that = this;
+         stage.addChild(this.bitmap);
          data.bricks.forEach(function(brick){
             that.bricks[brick.id] = that.drawObject(brick, stage);
          });
 
          this.ball = this.drawBall(data.ball, stage);
          this.pad = this.drawObject(data.pad, stage);
+         
          stage.update();
 
       },
@@ -50,7 +52,7 @@ function($) {
          var obj, radius;
          obj = new createjs.Shape();
          radius = object.radius ? object.radius : 5;
-         obj.graphics.beginFill(object.color).drawRoundRect(0, 0, object.width, object.height, 5);
+         obj.graphics.beginFill(object.color).drawRoundRect(0, 0, object.width, object.height, radius);
          obj.x = object.x;
          obj.y = object.y;
          stage.addChild(obj);
