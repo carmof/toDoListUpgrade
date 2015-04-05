@@ -26,18 +26,6 @@ function($) {
 	*/
 
 	proto = {
-	   setSpeed: function(newSpeed){
-	      this.speed = newSpeed;
-	   },
-	   setColor: function(newColor){
-	      this.color = newColor;
-	   },
-	   setSpeed: function(newSpeed){
-	      this.speed = newSpeed;
-	   },
-	   reset: function(){
-	      this
-	   }
 	};
 
 

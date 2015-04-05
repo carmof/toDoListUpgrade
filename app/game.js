@@ -14,8 +14,9 @@ function($, Ball, Brick, Pad, Canvas) {
 	brickCols = 9,
 	bricksPadding = 5,
 	brickHeight = 20,
-	brickWidth = 107;
-	brickRadius = 5;	
+	brickWidth = 107,
+	brickRadius = 5,
+	keyDown = 1;	
 
 
 	/*
@@ -36,7 +37,6 @@ function($, Ball, Brick, Pad, Canvas) {
 		base.pad = null;
 		this.prevBall = null;
 		base.time = null;
-		base.bricksDestroyed = [];
 		base.deadBricks = 0;
 		base.prevBall = {"x": 0, "y": 0};
 		base.prevPad = {"x": 0, "y": 0,"height": 0, "width": 0};
@@ -61,24 +61,20 @@ function($, Ball, Brick, Pad, Canvas) {
 		},
 		initGame: function(){
 			var that = this, posX = 10, posY = 10, i = 0, j = 0;
+
+			//init game variables
 			this.bricks = [];
 			this.deadBricks = 0;
 			this.pad = Pad.new(padWidth, padHeight, padRadius, padSpeed, 0, "#FFFFFF",  this.padStartX, this.padStartY);
 			this.ball = Ball.new(ballRadius, ballSpeed, 0,0, "#FFFFFF", this.padStartX + this.pad.width/2, this.padStartY - ballRadius);//rad, spd, dirc, colr, pos
+
 			//adding listener to windows
-			window.addEventListener('keydown', function (evt) {
-				
-			    switch (evt.keyCode) {
-			        // Left arrow
-			        case 37:
-			        	that.pad.directionX = -1;
-			            break;
-			        // Right arrow   
-			        case 39:
-			        	that.pad.directionX = 1;
-			            break;
-			    }
-			}, true);
+			$(document).keydown(function(event){
+		        keyDown = event.which;
+		    }).keyup(function(event){
+		    	keyDown = 1;
+		    });
+
 			//setting all bricks
 			for(i = 0; i < brickRows; i++){
 				for(j = 0; j < brickCols; j++){
@@ -90,37 +86,40 @@ function($, Ball, Brick, Pad, Canvas) {
 			}
 
 			//start ball movement
-			this.ball.directionX = -1;
+			this.ball.directionX = 1;
 			this.ball.directionY = 1;
 		},
 		getState: function(){
 			return {
 				"ball": this.ball,
 				"pad": this.pad,
-				"bricks": this.bricks,
-				"bricksDestroyed": this.bricksDestroyed
+				"bricks": this.bricks
 			};
 
 		},
-		positionBricks: function(numRows, numCol){
-			var brick = Brick.new(brickWidth, brickHeight, {"x": 100, "y": 100}, "rgb(0,0,0)");
-			this.drawBrick(brick);
-		},
-
 		loop: function(){
+			this.definePadDirection();
+			this.ballCollisions();
 			this.movePad();
 			this.pad.directionX = 0;
-			this.ballCollisions();
 			if(this.deadBricks == this.bricks.length){
 				this.win();
 			}
 			this.canvas.render(this.getState(), this.stage);
 		},
+		definePadDirection: function(){
+			if(keyDown == 39){
+				this.pad.directionX = 1;
+			}else if( keyDown == 37){
+				this.pad.directionX = -1;
+			}
+		},
 		ballCollisions: function(){
 			this.ballCollideWithWindow();
 			this.ballCollideWithBricks();
-			this.ballCollideWithObject(this.pad);
-			// this.ballCollideWithObject(this.prevPad);
+			if(this.ballCollideWithObject(this.pad) && this.pad.directionX != 0){
+				this.ball.directionX = this.pad.directionX * -1;
+			}
 			this.prevBall.x = this.ball.x;
 			this.prevBall.y = this.ball.y;
 			this.prevPad.x = this.pad.x;
@@ -145,7 +144,6 @@ function($, Ball, Brick, Pad, Canvas) {
 				}else{
 					//if it hit the sides of the pad
 					this.ball.directionX *= -1;
-					// clearInterval(this.intervalID);
 				}
 				return true;
 			}
@@ -153,7 +151,6 @@ function($, Ball, Brick, Pad, Canvas) {
 		},
 		ballCollideWithBricks: function(){
 			var that = this;
-			this.bricksDestroyed = [];
 			this.bricks.forEach(function(brick, i){
 				//testing if the ball is inside or on the edges of the brick 
 				if(!brick.dead && that.ballCollideWithObject(brick)){
@@ -185,7 +182,7 @@ function($, Ball, Brick, Pad, Canvas) {
 			
 		},
 		movePad: function(){
-			this.pad.x += this.pad.speed * this.pad.directionX;
+			this.pad.x += this.pad.speed * this.pad.directionX * 0.7;
 
 			if(this.pad.x < 0){
 				this.pad.x = 0;
