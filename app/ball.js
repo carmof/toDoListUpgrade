@@ -25,6 +25,12 @@ function($) {
    */
 
    proto = {
+      changeDirectionX: function(){
+         this.directionX *= -1;
+      },
+      changeDirectionY: function(){
+         this.directionY *= -1;
+      }
    };
 
 

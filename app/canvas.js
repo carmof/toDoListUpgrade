@@ -23,7 +23,19 @@ function($) {
    proto = {
       start: function(data, stage){
          var that = this;
+         stage.clear();
+         this.bricks = [];
+         var text = new createjs.Text();
+         text.set({ 
+                text: 'SCORE: ', 
+                textAlign: 'center' ,
+                x: 100,
+                y: 200,
+                font: "bold 36px Arial",
+                color: "#FFFFFF"
+            }); 
          stage.addChild(this.bitmap);
+         stage.addChild(text);
          data.bricks.forEach(function(brick){
             that.bricks[brick.id] = that.drawObject(brick, stage);
          });
