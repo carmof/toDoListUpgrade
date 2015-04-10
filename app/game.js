@@ -4,11 +4,11 @@ function($, Ball, Brick, Pad, Canvas) {
 
 	var Game, proto, canvasWidth, canvasHeight, canvasID
 	ballRadius = 10,
-	ballSpeed = 5,
+	ballSpeed = 10,
 	padWidth = 150,
 	padHeight = 10,
 	padRadius = 5,
-	padSpeed = 20,
+	padSpeed = 30,
 	canvasPadding = 10,
 	brickRows = 5,
 	brickCols = 9,
@@ -16,7 +16,8 @@ function($, Ball, Brick, Pad, Canvas) {
 	brickHeight = 20,
 	brickWidth = 107,
 	brickRadius = 5,
-	keyDown = 1;	
+	keyDown = 1,
+	keyEvent = true;	
 
 
 	/*
@@ -57,23 +58,19 @@ function($, Ball, Brick, Pad, Canvas) {
 			this.initGame();
 			this.canvas.start(this.getState(), this.stage);
 			this.time = (new Date()).getTime();
-			this.intervalID = window.setInterval(function(){that.loop();}, 1000/50);
+			this.intervalID = window.setInterval(function(){that.loop();}, 1000/35);
 		},
 		initGame: function(){
 			var that = this, posX = 10, posY = 10, i = 0, j = 0;
 			//init game variables
 			this.bricks = [];
+			Brick.reset();
 			this.deadBricks = 0;
 			this.pad = Pad.new(padWidth, padHeight, padRadius, padSpeed, 0, "#FFFFFF",  this.padStartX, this.padStartY);
 			this.ball = Ball.new(ballRadius, ballSpeed, 0,0, "#FFFFFF", this.padStartX + this.pad.width/2, this.padStartY - ballRadius);
 
 			//adding listener to window
-			$(document).keydown(function(event){
-		        keyDown = event.which;
-		    }).keyup(function(event){
-		    	keyDown = 1;
-		    });
-
+			this.setKeyboardEvent();
 			//setting all bricks
 			for(i = 0; i < brickRows; i++){
 				for(j = 0; j < brickCols; j++){
@@ -86,6 +83,16 @@ function($, Ball, Brick, Pad, Canvas) {
 
 			//start ball movement
 		},
+		setKeyboardEvent: function(){
+			if(keyEvent){
+				keyEvent = false;
+				$(document).keydown(function(event){
+			        keyDown = event.which;
+			    }).keyup(function(event){
+			    	keyDown = 1;
+			    });
+			}
+		},
 		getState: function(){
 			return {
 				"ball": this.ball,
@@ -97,11 +104,11 @@ function($, Ball, Brick, Pad, Canvas) {
 		loop: function(){
 			this.definePadDirection();
 			this.ballCollisions();
-			this.movePad();
-			this.pad.directionX = 0;
 			if(this.deadBricks == this.bricks.length){
 				this.win();
 			}
+			this.movePad();
+			this.pad.directionX = 0;
 			this.canvas.render(this.getState(), this.stage);
 		},
 		definePadDirection: function(){
@@ -131,14 +138,13 @@ function($, Ball, Brick, Pad, Canvas) {
 						
 		},
 		ballCollideWithObject: function(obj){
-			var radius = obj.radius ? obj.radius : 0;
-			if(this.ball.x + this.ball.radius >= obj.x - radius &&
-			   this.ball.x - this.ball.radius < obj.x + obj.width + radius &&
+			if(this.ball.x + this.ball.radius >= obj.x &&
+			   this.ball.x - this.ball.radius <= obj.x + obj.width &&
 			   this.ball.y + this.ball.radius >= obj.y &&
-			   this.ball.y - this.ball.radius < obj.y + obj.height){
+			   this.ball.y - this.ball.radius <= obj.y + obj.height){
 
-				if(this.prevBall.x + this.ball.radius >= obj.x - radius &&
-			   	   this.prevBall.x - this.ball.radius <= obj.x + obj.width + radius){
+				if(this.prevBall.x + this.ball.radius > obj.x  &&
+			   	   this.prevBall.x - this.ball.radius < obj.x + obj.width){
 			   	   	//if it hit the top part of the pad
 					this.ball.changeDirectionY();
 				}else{

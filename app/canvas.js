@@ -42,7 +42,6 @@ function($) {
 
          this.ball = this.drawBall(data.ball, stage);
          this.pad = this.drawObject(data.pad, stage);
-         
          stage.update();
 
       },
@@ -57,7 +56,6 @@ function($) {
                that.bricks[brick.id].y = -100;
             }
          });
-         this.pad.speed = data.pad.speed;
          stage.update();
       },
       drawObject: function(object, stage){
