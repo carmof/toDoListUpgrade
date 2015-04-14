@@ -3,9 +3,9 @@
 
 This document describes the Class structure used in the "Breaking Bricks" project.
 
-## -Game
+###Game
 
-makeNewGame(canvasObj)
+Constructor: makeNewGame
 
   - proto
 
