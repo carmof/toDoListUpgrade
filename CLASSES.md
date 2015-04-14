@@ -39,6 +39,20 @@ This document describes the Class structure used in the "Breaking Bricks" projec
 
 ###Canvas
 
+  - **Constructor**
+  
+    makeNewCanvas
+
+  - **proto**
+   
+  start
+
+  render
+  
+  drawObject
+  
+  drawBall
+  
 -Pad
 -Ball
 -Bricks
