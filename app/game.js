@@ -59,22 +59,9 @@ function ($, Ball, Brick, Pad, Canvas) {
 
 	proto = {
 
-		startGame: function(){
-
-			var that = this;
-			this.initGame();
-			this.canvas.start(this.getState(), this.stage);
-			this.time = (new Date()).getTime();
-			this.intervalID = window.setInterval(function(){
-
-				that.loop();
-
-			}, 1000 / 35);
-
-		},
 		initGame: function(){
 
-			var that = this, posX = 10, posY = 10, i = 0, j = 0;
+			var that = this, posX = 10, posY = 40, i = 0, j = 0;
 			// init game variables
 			this.bricks = [];
 			Brick.reset();
@@ -101,6 +88,45 @@ function ($, Ball, Brick, Pad, Canvas) {
 				posX = 10;
 
 			}
+			this.canvas.start(this.getState());
+			this.canvas.render(this.getState());
+
+		},
+		startGame: function(){
+
+			var that = this;
+			this.time = (new Date()).getTime();
+			this.intervalID = window.setInterval(function(){
+
+				that.loop();
+
+			}, 1000 / 35);
+
+		},
+		loop: function () {
+
+			this.definePadDirection();
+			this.ballCollisions();
+			if (this.deadBricks === this.bricks.length){
+
+				this.win();
+
+			}
+			this.movePad();
+			this.pad.directionX = 0;
+			this.canvas.render(this.getState());
+
+		},
+		getState: function () {
+
+			return {
+
+				"ball": this.ball,
+				"pad": this.pad,
+				"bricks": this.bricks,
+				"score": this.deadBricks
+
+			};
 
 		},
 		setKeyboardEvent: function(){
@@ -119,31 +145,6 @@ function ($, Ball, Brick, Pad, Canvas) {
 				});
 
 			}
-
-		},
-		getState: function () {
-
-			return {
-
-				"ball": this.ball,
-				"pad": this.pad,
-				"bricks": this.bricks
-
-			};
-
-		},
-		loop: function () {
-
-			this.definePadDirection();
-			this.ballCollisions();
-			if (this.deadBricks === this.bricks.length){
-
-				this.win();
-
-			}
-			this.movePad();
-			this.pad.directionX = 0;
-			this.canvas.render(this.getState(), this.stage);
 
 		},
 		definePadDirection: function () {
@@ -277,17 +278,20 @@ function ($, Ball, Brick, Pad, Canvas) {
 
 			var end = (new Date).getTime(),
 			totalTime = Math.round((end - this.time) / 1000);
-			console.log("YOU LOST - points: " + this.deadBricks + " in " + totalTime + "s");
 			clearInterval(this.intervalID);
-			this.startGame();
+			$("#demoCanvas").toggleClass("opaco");
+			$("#btmStart").toggleClass("invisible");
+			this.initGame();
 
 		},
 		win: function(){
 
 			var end = (new Date).getTime(),
 			totalTime = Math.round((end - this.time) / 1000);
-			console.log("YOU WON - points: " + this.deadBricks + " in " + totalTime + "s");
 			clearInterval(this.intervalID);
+			$("#demoCanvas").toggleClass("opaco");
+			$("#btmStart").toggleClass("invisible");
+			this.initGame();
 
 		}
 

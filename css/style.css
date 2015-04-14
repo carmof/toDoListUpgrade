@@ -1,0 +1,34 @@
+button#btmStart {
+	position: absolute;
+	width: 200px;
+	height: 50px;
+	left: 50%;
+	z-index: 4;
+	top: 300px;
+	font:          normal 700 24px/1 "Calibri", sans-serif;
+	margin-left: -100px;
+	background:    -moz-linear-gradient(#3d85c6, #073763);
+	background:    -o-linear-gradient(#3d85c6, #073763);
+	background:    -webkit-linear-gradient(#3d85c6, #073763);
+	background:    linear-gradient(#3d85c6, #073763);
+	border-radius: 5px;
+	color:         #fff;
+	text-align:    center;
+	text-shadow:   1px 1px 0 #000;
+	cursor: pointer;
+}
+
+canvas#demoCanvas{
+	border: 1px solid;
+	position: absolute;
+	left: 50%; 
+	margin-left: -512px;
+}
+
+.opaco{
+	opacity: 0.8;
+}
+
+.invisible{
+	visibility: hidden;
+}

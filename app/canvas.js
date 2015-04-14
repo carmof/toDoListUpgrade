@@ -5,7 +5,7 @@
 * @see Game
 */
 
-define([ "jquery", "easelJS" ],
+define([ "jquery", "easelJS", "preLoad" ],
 
 function($) {
 
@@ -15,13 +15,15 @@ function($) {
    *       Constructors
    */
 
-   function makeNewCanvas() {
+   function makeNewCanvas(canvas) {
 
       var base = Object.create(proto);
+      base.bitmap = new createjs.Bitmap("css/img/background.jpg");
+      base.stage = canvas;
       base.ball = null;
       base.pad = null;
       base.bricks = [];
-      base.bitmap = new createjs.Bitmap("css/img/background.jpg");
+      base.score = new createjs.Text();
       return base;
 
    }
@@ -32,42 +34,41 @@ function($) {
    */
    proto = {
 
-      start: function(data, stage){
+      start: function(data){
 
-         var that = this, text;
-         stage.clear();
+         var that = this;
+         this.stage.clear();
          this.bricks = [];
          text = new createjs.Text();
-         text.set({
-
-                text: "SCORE: ",
-                textAlign: "center" ,
-                x: 100,
-                y: 200,
-                font: "bold 36px Arial",
-                color: "#FFFFFF"
-
-            });
-
-         stage.addChild(this.bitmap);
-         stage.addChild(text);
+         this.stage.addChild(this.bitmap); // adding
+         this.score.text = "SCORE: ";
+         this.score.x = 10;
+         this.score.y = 5;
+         this.score.font = "26px Helvetica";
+         this.score.color = "#66FFFF";
+         this.stage.addChild(this.score); // adding score to canvas image
          data.bricks.forEach(function(brick){
 
-            that.bricks[ brick.id ] = that.drawObject(brick, stage);
+            that.bricks[ brick.id ] = that.drawObject(brick);
 
          });
 
-         this.ball = this.drawBall(data.ball, stage);
-         this.pad = this.drawObject(data.pad, stage);
-         stage.update();
+         this.ball = this.drawBall(data.ball);
+         this.pad = this.drawObject(data.pad);
+         window.setTimeout(function(){
+
+            that.render(data);
+
+         }, 100);
 
       },
-      render: function(data, stage) {
+      render: function(data) {
 
          var that = this;
          this.pad.x = data.pad.x;
          this.ball.x = data.ball.x;
          this.ball.y = data.ball.y;
+         this.score.text = "SCORE: " + data.score;
          data.bricks.forEach(function(brick){
 
             if (brick.dead){
@@ -78,10 +79,11 @@ function($) {
             }
 
          });
-         stage.update();
+
+         this.stage.update();
 
       },
-      drawObject: function(object, stage) {
+      drawObject: function(object) {
 
          var obj, radius;
          obj = new createjs.Shape();
@@ -89,17 +91,17 @@ function($) {
          obj.graphics.beginFill(object.color).drawRoundRect(0, 0, object.width, object.height, radius);
          obj.x = object.x;
          obj.y = object.y;
-         stage.addChild(obj);
+         this.stage.addChild(obj);
          return obj;
 
       },
-      drawBall: function(ball, stage) {
+      drawBall: function(ball) {
 
          var circle = new createjs.Shape();
          circle.graphics.beginFill(ball.color).drawCircle(0, 0, ball.radius);
          circle.x = ball.x;
          circle.y = ball.y;
-         stage.addChild(circle);
+         this.stage.addChild(circle);
          return circle;
 
       }
