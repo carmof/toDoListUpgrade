@@ -6,7 +6,7 @@ This document describes the Class structure used in the "Breaking Bricks" projec
 ###Game
 
   - **Constructor**
-  - 
+  
     makeNewGame
 
   - **proto**
