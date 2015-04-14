@@ -18,14 +18,23 @@ setKeyboardEvent
 getState
 
 loop
+
 definePadDirection
+
 ballCollisions
+
 ballCollideWithObject
+
 ballCollideWithBricks
+
 ballCollideWithWindow
+
 movePad
+
 lose
+
 win
+
 -Canvas
 
 -Pad
