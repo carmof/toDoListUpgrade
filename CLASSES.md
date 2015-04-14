@@ -5,6 +5,8 @@ This document describes the Class structure used in the "Breaking Bricks" projec
 
 ###Game
 
+**Structure*
+
     makeNewGame
 
   - **proto**
@@ -37,6 +39,8 @@ This document describes the Class structure used in the "Breaking Bricks" projec
 
 ###Canvas
 
+**Structure*
+
     makeNewCanvas
 
   - **proto**
@@ -51,6 +55,8 @@ This document describes the Class structure used in the "Breaking Bricks" projec
   
 ###Pad
 
+**Structure*
+
     makeNewPad
 
   - **proto**
@@ -58,6 +64,8 @@ This document describes the Class structure used in the "Breaking Bricks" projec
   changeDirection
 
 ###Ball
+
+**Structure*
 
     makeNewBall
 
@@ -68,6 +76,8 @@ This document describes the Class structure used in the "Breaking Bricks" projec
   changeDirectionY
 
 ###Brick
+
+**Structure*
 
     makeNewBrick
     
