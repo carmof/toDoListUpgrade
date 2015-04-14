@@ -1,3 +1,9 @@
+/**  
+* Brick.js - Controls the brick state
+* @author  Felipe Carmo
+* @version 1.0
+*/
+
 define(["jquery"],
 function($) {
 

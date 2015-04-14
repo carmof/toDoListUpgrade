@@ -1,3 +1,10 @@
+/**  
+* Canvas.js - Responsible for the view part of the project, by updating the window.
+* @author  Felipe Carmo
+* @version 1.0
+* @see Game
+*/
+
 define(["jquery", "easelJS"],
 function($) {
 

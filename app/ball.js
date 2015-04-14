@@ -1,3 +1,9 @@
+/**  
+* Ball.js - Controls the ball state
+* @author  Felipe Carmo
+* @version 1.0
+*/
+
 define(["jquery"],
 function($) {
 

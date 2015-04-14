@@ -1,3 +1,9 @@
+/**  
+* Pad.js - Controls the pad state
+* @author  Felipe Carmo
+* @version 1.0
+*/
+
 define(["jquery"],
 function($) {
 	var Pad, proto;
