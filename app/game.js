@@ -39,8 +39,10 @@ function ($, Ball, Brick, Pad, Canvas) {
 		base.padStartX = base.canvasWidth / 2 - padWidth / 2;
 		base.padStartY = base.canvasHeight - padHeight - ballRadius * 3;
 		base.bricks = [];
-		base.ball = null;
-		base.pad = null;
+		base.pad = Pad.new(padWidth, padHeight, padRadius, padSpeed, 0, "#FFFFFF",
+								base.padStartX, base.padStartY);
+		base.ball = Ball.new(ballRadius, ballSpeed, 0, 0, "#FFFFFF",
+								base.padStartX + base.pad.width / 2, base.padStartY - ballRadius);
 		this.prevBall = null;
 		base.time = null;
 		base.deadBricks = 0;
@@ -66,10 +68,7 @@ function ($, Ball, Brick, Pad, Canvas) {
 			this.bricks = [];
 			Brick.reset();
 			this.deadBricks = 0;
-			this.pad = Pad.new(padWidth, padHeight, padRadius, padSpeed, 0,
-								"#FFFFFF",  this.padStartX, this.padStartY);
-			this.ball = Ball.new(ballRadius, ballSpeed, 0, 0,
-								"#FFFFFF", this.padStartX + this.pad.width / 2, this.padStartY - ballRadius);
+
 
 			// adding listener to window
 			this.setKeyboardEvent();
@@ -95,6 +94,8 @@ function ($, Ball, Brick, Pad, Canvas) {
 		startGame: function(){
 
 			var that = this;
+			this.ball.backInicialPosition();
+			this.pad.backInicialPosition();
 			this.time = (new Date()).getTime();
 			this.intervalID = window.setInterval(function(){
 

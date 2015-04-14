@@ -7,7 +7,7 @@
 define([ "jquery" ],
 function($) {
 
-   var Ball, proto;
+   var Ball, proto, initX, initY;
 
    /*
    *       Constructors
@@ -23,6 +23,8 @@ function($) {
       ball.color = colr;
       ball.x = posX;
       ball.y = posY;
+      initX = posX;
+      initY = posY;
       return ball;
 
    }
@@ -33,7 +35,12 @@ function($) {
    */
 
    proto = {
+      backInicialPosition: function(){
 
+         this.x = initX;
+         this.y = initY;
+
+      },
       changeDirectionX: function() {
 
          this.directionX *= -1;

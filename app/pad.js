@@ -7,7 +7,7 @@
 define([ "jquery" ],
 function($) {
 
-	var Pad, proto;
+	var Pad, proto, initX, initY;
 
 	/*
 	*       Constructors
@@ -24,6 +24,8 @@ function($) {
 		pad.color = colr;
 		pad.x = posX;
 		pad.y = posY;
+		initX = posX;
+		initY = posY;
 		pad.directionX = 0;
 		return pad;
 
@@ -35,7 +37,12 @@ function($) {
 	*/
 
 	proto = {
+		backInicialPosition: function(){
 
+			this.x = initX;
+			this.y = initY;
+
+		},
 		changeDirection: function(dir){
 
 			if
