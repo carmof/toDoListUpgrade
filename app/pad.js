@@ -1,11 +1,12 @@
-/**  
+/**
 * Pad.js - Controls the pad state
 * @author  Felipe Carmo
 * @version 1.0
 */
 
-define(["jquery"],
+define([ "jquery" ],
 function($) {
+
 	var Pad, proto;
 
 	/*
@@ -13,6 +14,7 @@ function($) {
 	*/
 
 	function makeNewPad(wdh, hgt, rad, spd, dirc, colr, posX, posY) {
+
 		var pad = Object.create(proto);
 		pad.width = wdh;
 		pad.height = hgt;
@@ -23,7 +25,8 @@ function($) {
 		pad.x = posX;
 		pad.y = posY;
 		pad.directionX = 0;
-	   return pad;
+		return pad;
+
 	}
 
 
@@ -32,20 +35,30 @@ function($) {
 	*/
 
 	proto = {
-		changeDirection: function(dir){
-			if(dir === undefined){
-				this.directionX *= -1;
-			}else{
-				this.directionX = dir;
-			}
-		}
-	};
 
+		changeDirection: function(dir){
+
+			if
+				(dir === undefined){
+
+				this.directionX *= -1;
+
+			}else {
+
+				this.directionX = dir;
+
+			}
+
+		}
+
+	};
 
 
 	// DO NOT MODIFY ANYTHING BELOW THIS LINE
 	Pad = {
+
 		new: makeNewPad
+
 	};
 
 	Object.defineProperty(Pad, "prototype", {
@@ -54,4 +67,5 @@ function($) {
 	});
 
 	return Pad;
+
 });

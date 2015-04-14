@@ -1,10 +1,10 @@
-/**  
+/**
 * Brick.js - Controls the brick state
 * @author  Felipe Carmo
 * @version 1.0
 */
 
-define(["jquery"],
+define([ "jquery" ],
 function($) {
 
 	var Brick, proto, ID = 0;
@@ -13,7 +13,7 @@ function($) {
 	*       Constructors
 	*/
 
-	function makeNewBrick (wdh, hgt, rad, posX, posY, colr) {
+	function makeNewBrick(wdh, hgt, rad, posX, posY, colr) {
 
 		var brick = Object.create(proto);
 		brick.id = ID;
@@ -25,18 +25,19 @@ function($) {
 		brick.color = colr;
 		ID += 1;
 		brick.dead = false;
-	    return brick;
+		return brick;
+
 	}
-
-	   
-
 
 	/*
 	*       Prototype / Instance methods
 	*/
 	function resetId(){
+
 		ID = 0;
+
 	}
+
 	proto = {
 
 	};
@@ -45,8 +46,10 @@ function($) {
 
 	// DO NOT MODIFY ANYTHING BELOW THIS LINE
 	Brick = {
+
 		new: makeNewBrick,
 		reset: resetId
+
 	};
 
 	Object.defineProperty(Brick, "prototype", {
@@ -55,4 +58,5 @@ function($) {
 	});
 
 	return Brick;
+
 });

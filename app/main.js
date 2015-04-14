@@ -18,13 +18,16 @@ require.config({
 });
 
 // All other modules should be called through here
-require(["jquery", "handlebars", "app/game.js"],
+require([ "jquery", "handlebars", "app/game.js" ],
 function($, handleBars, Game) {
+
    // mixin
    $(function() {
+
       var stage = new createjs.Stage("demoCanvas");
       game = Game.new(stage);
       game.startGame();
+
    });
-   
+
 });

@@ -1,10 +1,10 @@
-/**  
+/**
 * Ball.js - Controls the ball state
 * @author  Felipe Carmo
 * @version 1.0
 */
 
-define(["jquery"],
+define([ "jquery" ],
 function($) {
 
    var Ball, proto;
@@ -14,6 +14,7 @@ function($) {
    */
 
    function makeNewBall(rad, spd, dircX, dircY, colr, posX, posY) {
+
       var ball = Object.create(proto);
       ball.radius = rad;
       ball.speed = spd;
@@ -23,6 +24,7 @@ function($) {
       ball.x = posX;
       ball.y = posY;
       return ball;
+
    }
 
 
@@ -31,11 +33,16 @@ function($) {
    */
 
    proto = {
-      changeDirectionX: function(){
+
+      changeDirectionX: function() {
+
          this.directionX *= -1;
+
       },
-      changeDirectionY: function(){
+      changeDirectionY: function() {
+
          this.directionY *= -1;
+
       }
    };
 
