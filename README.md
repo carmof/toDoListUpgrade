@@ -1,9 +1,16 @@
+#Breaking Bricks
 
-This document describes the Final Project for the class "Breaking Bricks".
+
+This document describes the Final Project for the WebApplication class.
+
+Run: https://cdn.rawgit.com/carmof/webPortifolio/master/index.html
+*Source: https://rawgit.com/*
+
+## Description
+
+The application consists of the "Breaking Bricks" game.
 
 
-run online: https://cdn.rawgit.com/carmof/webPortifolio/master/index.html
-source: https://rawgit.com/
 
 
 
