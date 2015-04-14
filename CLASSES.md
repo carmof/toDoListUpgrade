@@ -7,7 +7,7 @@ This document describes the Class structure used in the "Breaking Bricks" projec
 
 Constructor: makeNewGame
 
-  - proto
+  - **proto**
 
     startGame
 
@@ -35,7 +35,7 @@ Constructor: makeNewGame
 
     win
 
--Canvas
+###Canvas
 
 -Pad
 -Ball
