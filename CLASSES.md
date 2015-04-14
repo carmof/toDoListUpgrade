@@ -53,9 +53,37 @@ This document describes the Class structure used in the "Breaking Bricks" projec
   
   drawBall
   
--Pad
--Ball
--Bricks
+###Pad
+
+  - **Constructor**
+  
+    makeNewPad
+
+  - **proto**
+  
+  changeDirection
+
+###Ball
+
+
+  - **Constructor**
+  
+    makeNewBall
+
+  - **proto**
+  
+  changeDirectionX
+
+  changeDirectionY
+
+###Brick
+
+
+  - **Constructor**
+  
+    makeNewBrick
+    
+    resetId
 
 
 
