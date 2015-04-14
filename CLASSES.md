@@ -4,12 +4,19 @@
 This document describes the Class structure used in the "Breaking Bricks" project.
 
 -Game
+
 makeNewGame(canvasObj)
+
   - proto
+
 startGame
+
 initGame
+
 setKeyboardEvent
+
 getState
+
 loop
 definePadDirection
 ballCollisions
