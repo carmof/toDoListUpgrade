@@ -1,7 +1,7 @@
 define(["jquery"],
 function($) {
 
-	var Brick, proto, ID = 1;
+	var Brick, proto, ID = 0;
 
 	/*
 	*       Constructors
@@ -28,7 +28,9 @@ function($) {
 	/*
 	*       Prototype / Instance methods
 	*/
-
+	function resetId(){
+		ID = 0;
+	}
 	proto = {
 
 	};
@@ -37,7 +39,8 @@ function($) {
 
 	// DO NOT MODIFY ANYTHING BELOW THIS LINE
 	Brick = {
-		new: makeNewBrick
+		new: makeNewBrick,
+		reset: resetId
 	};
 
 	Object.defineProperty(Brick, "prototype", {

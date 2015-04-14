@@ -4,11 +4,11 @@ function($, Ball, Brick, Pad, Canvas) {
 
 	var Game, proto, canvasWidth, canvasHeight, canvasID
 	ballRadius = 10,
-	ballSpeed = 5,
+	ballSpeed = 10,
 	padWidth = 150,
 	padHeight = 10,
 	padRadius = 5,
-	padSpeed = 20,
+	padSpeed = 30,
 	canvasPadding = 10,
 	brickRows = 5,
 	brickCols = 9,
@@ -16,7 +16,8 @@ function($, Ball, Brick, Pad, Canvas) {
 	brickHeight = 20,
 	brickWidth = 107,
 	brickRadius = 5,
-	keyDown = 1;	
+	keyDown = 1,
+	keyEvent = true;	
 
 
 	/*
@@ -57,24 +58,19 @@ function($, Ball, Brick, Pad, Canvas) {
 			this.initGame();
 			this.canvas.start(this.getState(), this.stage);
 			this.time = (new Date()).getTime();
-			this.intervalID = window.setInterval(function(){that.loop();}, 1000/50);
+			this.intervalID = window.setInterval(function(){that.loop();}, 1000/35);
 		},
 		initGame: function(){
 			var that = this, posX = 10, posY = 10, i = 0, j = 0;
-
 			//init game variables
 			this.bricks = [];
+			Brick.reset();
 			this.deadBricks = 0;
 			this.pad = Pad.new(padWidth, padHeight, padRadius, padSpeed, 0, "#FFFFFF",  this.padStartX, this.padStartY);
-			this.ball = Ball.new(ballRadius, ballSpeed, 0,0, "#FFFFFF", this.padStartX + this.pad.width/2, this.padStartY - ballRadius);//rad, spd, dirc, colr, pos
+			this.ball = Ball.new(ballRadius, ballSpeed, 0,0, "#FFFFFF", this.padStartX + this.pad.width/2, this.padStartY - ballRadius);
 
-			//adding listener to windows
-			$(document).keydown(function(event){
-		        keyDown = event.which;
-		    }).keyup(function(event){
-		    	keyDown = 1;
-		    });
-
+			//adding listener to window
+			this.setKeyboardEvent();
 			//setting all bricks
 			for(i = 0; i < brickRows; i++){
 				for(j = 0; j < brickCols; j++){
@@ -86,8 +82,16 @@ function($, Ball, Brick, Pad, Canvas) {
 			}
 
 			//start ball movement
-			this.ball.directionX = 1;
-			this.ball.directionY = 1;
+		},
+		setKeyboardEvent: function(){
+			if(keyEvent){
+				keyEvent = false;
+				$(document).keydown(function(event){
+			        keyDown = event.which;
+			    }).keyup(function(event){
+			    	keyDown = 1;
+			    });
+			}
 		},
 		getState: function(){
 			return {
@@ -100,18 +104,18 @@ function($, Ball, Brick, Pad, Canvas) {
 		loop: function(){
 			this.definePadDirection();
 			this.ballCollisions();
-			this.movePad();
-			this.pad.directionX = 0;
 			if(this.deadBricks == this.bricks.length){
 				this.win();
 			}
+			this.movePad();
+			this.pad.directionX = 0;
 			this.canvas.render(this.getState(), this.stage);
 		},
 		definePadDirection: function(){
 			if(keyDown == 39){
-				this.pad.directionX = 1;
+				this.pad.changeDirection(1);
 			}else if( keyDown == 37){
-				this.pad.directionX = -1;
+				this.pad.changeDirection(-1);
 			}
 		},
 		ballCollisions: function(){
@@ -119,6 +123,9 @@ function($, Ball, Brick, Pad, Canvas) {
 			this.ballCollideWithBricks();
 			if(this.ballCollideWithObject(this.pad) && this.pad.directionX != 0){
 				this.ball.directionX = this.pad.directionX * -1;
+				if(this.ball.directionY === 0){
+					this.ball.directionY = 1;
+				}
 			}
 			this.prevBall.x = this.ball.x;
 			this.prevBall.y = this.ball.y;
@@ -131,19 +138,18 @@ function($, Ball, Brick, Pad, Canvas) {
 						
 		},
 		ballCollideWithObject: function(obj){
-			var radius = obj.radius ? obj.radius : 0;
-			if(this.ball.x + this.ball.radius >= obj.x - radius &&
-			   this.ball.x - this.ball.radius < obj.x + obj.width + radius &&
+			if(this.ball.x + this.ball.radius >= obj.x &&
+			   this.ball.x - this.ball.radius <= obj.x + obj.width &&
 			   this.ball.y + this.ball.radius >= obj.y &&
-			   this.ball.y - this.ball.radius < obj.y + obj.height){
+			   this.ball.y - this.ball.radius <= obj.y + obj.height){
 
-				if(this.prevBall.x + this.ball.radius >= obj.x - radius &&
-			   	   this.prevBall.x - this.ball.radius <= obj.x + obj.width + radius){
+				if(this.prevBall.x + this.ball.radius > obj.x  &&
+			   	   this.prevBall.x - this.ball.radius < obj.x + obj.width){
 			   	   	//if it hit the top part of the pad
-					this.ball.directionY *= -1;
+					this.ball.changeDirectionY();
 				}else{
 					//if it hit the sides of the pad
-					this.ball.directionX *= -1;
+					this.ball.changeDirectionX();
 				}
 				return true;
 			}
@@ -166,12 +172,12 @@ function($, Ball, Brick, Pad, Canvas) {
 		},
 		ballCollideWithWindow: function(){
 			if(this.ball.x - this.ball.radius <= 0 || this.ball.x + this.ball.radius >= this.canvasWidth){
-				this.ball.directionX *= -1;
+				this.ball.changeDirectionX();
 			}
 			
 			if(this.ball.y - this.ball.radius < 0){
 				this.ball.y = this.ball.radius;
-				this.ball.directionY *= -1;
+				this.ball.changeDirectionY();
 			}
 			if(this.ball.y + this.ball.radius > this.canvasHeight){
 				this.ball.y = this.canvasHeight - this.ball.radius;
@@ -191,7 +197,7 @@ function($, Ball, Brick, Pad, Canvas) {
 				this.pad.x = this.canvasWidth - this.pad.width;
 			}
 		},
-		lose: function(){
+		lose: function(){-1
 			var end = (new Date).getTime(),
 			totalTime = Math.round((end - this.time) / 1000);
 			console.log("YOU LOST - points: " + this.deadBricks + " in " + totalTime + "s");

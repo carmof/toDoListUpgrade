@@ -26,6 +26,13 @@ function($) {
 	*/
 
 	proto = {
+		changeDirection: function(dir){
+			if(dir === undefined){
+				this.directionX *= -1;
+			}else{
+				this.directionX = dir;
+			}
+		}
 	};
 
 
