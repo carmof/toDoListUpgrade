@@ -3,8 +3,7 @@
 
 This document describes the Final Project for the WebApplication class.
 
-Run: https://rawgit.com/carmof/webPortifolio/master/index.html
-*Source: https://rawgit.com/*
+Run: http://carmof.github.io/webPortifolio/
 
 ## Description
 
